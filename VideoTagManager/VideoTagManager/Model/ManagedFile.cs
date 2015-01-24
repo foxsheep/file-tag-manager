@@ -64,6 +64,15 @@ namespace VideoTagManager.Model {
             this.comment = "";
         }
 
+        public ManagedFile(string name, string path, List<Tag> tags, List<Author> authors, int rating, string comment) {
+            this.name = name;
+            this.path = path;
+            this.tags = tags;
+            this.authors = authors;
+            this.rating = rating;
+            this.comment = comment;
+        }
+
         public void addTag(Tag t) {
             tags.Add(t);
         }

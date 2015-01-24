@@ -24,6 +24,11 @@ namespace VideoTagManager.Model {
             this.description = "";
         }
 
+        public Tag(string tag, string description) {
+            this.tag = tag;
+            this.description = description;
+        }
+
         public override string ToString() {
             return this.tag;
         }

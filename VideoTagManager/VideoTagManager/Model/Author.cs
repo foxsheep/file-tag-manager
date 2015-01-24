@@ -24,6 +24,11 @@ namespace VideoTagManager.Model {
             this.comment = "";
         }
 
+        public Author(string name, string comment) {
+            this.name = name;
+            this.comment = comment;
+        }
+
         public override string ToString() {
             return this.name;
         }

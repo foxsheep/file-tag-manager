@@ -17,9 +17,7 @@ namespace VideoTagManager {
             Application.SetCompatibleTextRenderingDefault(false);
 
             if (VideoTagManager.FileIO.DataParser.dataFileExists()) {
-                //TODO
-                //Import data from XML file
-                //Run main form
+                init();
             } else {
                 ImportFileForm form = new ImportFileForm();
                 form.ShowDialog();
@@ -28,12 +26,17 @@ namespace VideoTagManager {
                 VideoTagManager.Controller.WritingController c = new VideoTagManager.Controller.WritingController();
                 try {
                     c.writeAll(path);
+                    init();
                 } catch (Exception ex) {
                     MessageBox.Show(ex.Message);
                 }
                 
             }
             //Application.Run(new Form1());
+        }
+
+        static void init() {
+            Application.Run(new MainForm());
         }
     }
 }

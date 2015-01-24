@@ -45,11 +45,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\Values.cs" />
+    <Compile Include="Controller\ReadingController.cs" />
+    <Compile Include="Controller\SearchController.cs" />
     <Compile Include="Controller\WritingController.cs" />
     <Compile Include="FileIO\DataParser.cs" />
     <Compile Include="FileIO\DataWriter.cs" />
     <Compile Include="FileIO\FileFinder.cs" />
     <Compile Include="Model\Author.cs" />
+    <Compile Include="Model\FileList.cs" />
     <Compile Include="Model\ManagedFile.cs" />
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Program.cs" />
@@ -59,6 +62,12 @@
     </Compile>
     <Compile Include="UI\ImportFileForm.Designer.cs">
       <DependentUpon>ImportFileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -71,6 +80,9 @@
     </Compile>
     <EmbeddedResource Include="UI\ImportFileForm.resx">
       <DependentUpon>ImportFileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
