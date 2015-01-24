@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Shell;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -62,6 +63,9 @@ namespace VideoTagManager.UI {
 
             //Thumbnail panel : TODO
             Panel p = new Panel();
+            ShellFile shellFile = ShellFile.FromFilePath(managedFile.path);
+            Bitmap shellThumb = shellFile.Thumbnail.ExtraLargeBitmap;
+            //p.BackgroundImage = shellThumb;
             filePan.Controls.Add(p);
 
             //Title of file
