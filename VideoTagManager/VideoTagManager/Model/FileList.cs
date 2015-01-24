@@ -25,6 +25,8 @@ namespace VideoTagManager.Model {
         }
 
         private void initializeLists() {
+            allTags = new List<Tag>();
+            allAuthors = new List<Author>();
             foreach (ManagedFile file in files) {
                 foreach (Tag tag in file.tags) {
                     if (!allTags.Contains(tag)) {

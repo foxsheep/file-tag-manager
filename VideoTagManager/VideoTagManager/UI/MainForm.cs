@@ -42,9 +42,16 @@ namespace VideoTagManager.UI {
             int filesOnScreen = 0;
             while (filesOnScreen < MAX_FILES_ON_SCREEN && currentIndex < filesToShow.Count()) {
                 tableLayoutPanel1.Controls.Add(createFilePanel(filesToShow[currentIndex]));
+                filesOnScreen++;
+                currentIndex++;
             }
         }
 
+        /// <summary>
+        /// Creates a panel with the file thumbnail and it's title below
+        /// </summary>
+        /// <param name="managedFile">The file</param>
+        /// <returns>A panel</returns>
         private Control createFilePanel(ManagedFile managedFile) {
             TableLayoutPanel filePan = new TableLayoutPanel();
             filePan.ColumnCount = 1;
@@ -53,11 +60,14 @@ namespace VideoTagManager.UI {
             filePan.RowStyles.Add(new RowStyle(SizeType.Percent, 40F)); //Title row
             filePan.Dock = DockStyle.Fill;
 
+            //Thumbnail panel : TODO
             Panel p = new Panel();
             filePan.Controls.Add(p);
 
+            //Title of file
             Label titleLbl = new Label();
             titleLbl.Text = managedFile.name;
+            titleLbl.Anchor = AnchorStyles.None;
             filePan.Controls.Add(titleLbl);
 
             return filePan;
