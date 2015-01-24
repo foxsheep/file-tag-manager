@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using VideoTagManager.Config;
 using VideoTagManager.Model;
@@ -14,8 +15,8 @@ namespace VideoTagManager.FileIO {
     /// Class that manages writing to the XML file that stores all the video information
     /// </summary>
     class DataWriter {
-        private XmlNode rootNode;
-        private XmlDocument doc;
+        private XElement root;
+
         public DataWriter() { }
 
         /// <summary>
@@ -23,16 +24,16 @@ namespace VideoTagManager.FileIO {
         /// </summary>
         /// <param name="files">List of the files in the folder</param>
         public void writeFiles(List<ManagedFile> files) {
-            doc = new XmlDocument();
             checkFileExistence();
-            doc.Load(Values.DATA_FILE_PATH);
-            rootNode = doc.DocumentElement;
+            root = XElement.Load(Values.DATA_FILE_PATH);
+            //xelement.Add(new XElement("file", "hello"));
+            //xelement.Add(new XElement("file", "yolo"));
 
             foreach (ManagedFile file in files) {
                 writeFile(file);
             }
 
-            doc.Save(Values.DATA_FILE_PATH);
+            root.Save(Values.DATA_FILE_PATH);
         }
 
         /// <summary>
@@ -41,26 +42,15 @@ namespace VideoTagManager.FileIO {
         /// <param name="file">File to write</param>
         /// <param name="root">Root node of the XML document</param>
         private void writeFile(ManagedFile file) {
-            XmlNode fNode = doc.CreateElement("file");
+            XElement fileNode = new XElement("file");
+            fileNode.Add(new XElement("name", file.name));
+            fileNode.Add(new XElement("path", file.path));
+            fileNode.Add(createTagNode(file.tags));
+            fileNode.Add(createAuthorNode(file.authors));
+            fileNode.Add(new XElement("rating", file.rating));
+            fileNode.Add(new XElement("comment", file.comment));
 
-            fNode.InnerText = file.name;
-
-            XmlNode fPath = doc.CreateElement("path");
-            fNode.InnerText = file.path;
-            fNode.AppendChild(fPath);
-
-            XmlNode fRating = doc.CreateElement("rating");
-            fRating.InnerText = file.rating.ToString();
-            fNode.AppendChild(fRating);
-
-            XmlNode fComment = doc.CreateElement("comment");
-            fComment.InnerText = file.comment;
-            fNode.AppendChild(fComment);
-
-            fNode.AppendChild(createTagNode(file.tags));
-            fNode.AppendChild(createAuthorNode(file.authors));
-
-            rootNode.AppendChild(fNode);
+            root.Add(fileNode);
         }
 
         /// <summary>
@@ -68,18 +58,17 @@ namespace VideoTagManager.FileIO {
         /// </summary>
         /// <param name="list">List of Authors</param>
         /// <returns>Node with all the authors</returns>
-        private XmlNode createAuthorNode(List<Author> list) {
-            XmlNode authorNode = doc.CreateElement("authors");
-            foreach (Author t in list) {
-                XmlNode a = doc.CreateElement("author");
-                a.InnerText = t.name;
-                XmlNode aComment = doc.CreateElement("comment");
-                aComment.InnerText = t.comment;
-                a.AppendChild(aComment);
+        private XElement createAuthorNode(List<Author> list) {
+            XElement authors = new XElement("authors");
 
-                authorNode.AppendChild(a);
+            foreach (Author a in list) {
+                XElement ele = new XElement("author");
+                ele.Add(new XElement("name", a.name));
+                ele.Add(new XElement("comment", a.comment));
+                authors.Add(ele);
             }
-            return authorNode;
+
+            return authors;
         }
 
         /// <summary>
@@ -87,18 +76,17 @@ namespace VideoTagManager.FileIO {
         /// </summary>
         /// <param name="list">Tag list</param>
         /// <returns>Node with all the Tags</returns>
-        private XmlNode createTagNode(List<Tag> list) {
-            XmlNode tagNode = doc.CreateElement("tags");
-            foreach (Tag t in list) {
-                XmlNode node = doc.CreateElement("tag");
-                node.InnerText = t.tag;
-                XmlNode tDescription = doc.CreateElement("description");
-                tDescription.InnerText = t.description;
-                node.AppendChild(tDescription);
+        private XElement createTagNode(List<Tag> list) {
+            XElement tags = new XElement("tags");
 
-                tagNode.AppendChild(node);
+            foreach (Tag t in list) {
+                XElement ele = new XElement("tag");
+                ele.Add(new XElement("tag", t.tag));
+                ele.Add(new XElement("description", t.description));
+                tags.Add(ele);
             }
-            return tagNode;
+
+            return tags;
         }
 
 
