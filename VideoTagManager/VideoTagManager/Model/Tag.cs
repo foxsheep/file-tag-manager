@@ -32,5 +32,12 @@ namespace VideoTagManager.Model {
         public override string ToString() {
             return this.tag;
         }
+
+        public override bool Equals(object obj) {
+            if (obj == null) return false;
+            Tag objAsTag = obj as Tag;
+            if (objAsTag == null) return false;
+            else return (this.tag == objAsTag.tag);
+        }
     }
 }

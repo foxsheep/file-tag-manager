@@ -13,5 +13,9 @@ namespace VideoTagManager.Controller {
         public SearchController(List<ManagedFile> files) {
             this.files = new FileList(files);
         }
+
+        public List<ManagedFile> allFiles() {
+            return files.files;
+        }
     }
 }

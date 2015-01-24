@@ -12,6 +12,8 @@ namespace VideoTagManager.Model {
     class FileList{
 
         public List<ManagedFile> files;
+        public List<Tag> allTags;
+        public List<Author> allAuthors;
 
         public FileList() {
             files = new List<ManagedFile>();
@@ -19,6 +21,22 @@ namespace VideoTagManager.Model {
 
         public FileList(List<ManagedFile> files) {
             this.files = files;
+            initializeLists();
+        }
+
+        private void initializeLists() {
+            foreach (ManagedFile file in files) {
+                foreach (Tag tag in file.tags) {
+                    if (!allTags.Contains(tag)) {
+                        allTags.Add(tag);
+                    }
+                }
+                foreach (Author aut in file.authors) {
+                    if (!allAuthors.Contains(aut)) {
+                        allAuthors.Add(aut);
+                    }
+                }
+            }
         }
     }
 }
