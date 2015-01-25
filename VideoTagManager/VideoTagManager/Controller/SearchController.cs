@@ -53,5 +53,17 @@ namespace VideoTagManager.Controller {
         public List<ManagedFile> getUntaggedFiles() {
             return files.getAllUntaggedFiles();
         }
+
+        public List<ManagedFile> getFilesWithAllTags(string[] tags) {
+            return files.getFilesWithAllTags(tags);
+        }
+
+        public List<ManagedFile> getFilesWithTags(string[] tags) {
+            return files.getFilesWithTags(tags);
+        }
+
+        public List<ManagedFile> getFilesWithTags(string tagSearch) {
+            return files.getFilesWithTag(tagSearch);
+        }
     }
 }

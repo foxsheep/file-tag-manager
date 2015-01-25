@@ -35,7 +35,11 @@ namespace VideoTagManager {
         }
 
         static void init() {
-            Application.Run(new MainForm());
+            try {
+                Application.Run(new MainForm());
+            } catch (NotImplementedException ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

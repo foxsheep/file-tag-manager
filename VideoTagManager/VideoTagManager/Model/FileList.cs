@@ -91,5 +91,53 @@ namespace VideoTagManager.Model {
             }
             return untagged;
         }
+
+        /// <summary>
+        /// Finds all files with at least one of the wanted tags
+        /// </summary>
+        /// <param name="tags">List of tags to search</param>
+        /// <returns>List of files</returns>
+        public List<ManagedFile> getFilesWithTags(string[] tags) {
+            List<ManagedFile> result = new List<ManagedFile>();
+            foreach (ManagedFile file in files) {
+                foreach (string tag in tags) {
+                    if (file.hasTag(tag)) {
+                        result.Add(file);
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Finds all files with all of the wanted tags.
+        /// </summary>
+        /// <param name="tags">List of the wanted tags</param>
+        /// <returns>List of files</returns>
+        public List<ManagedFile> getFilesWithAllTags(string[] tags) {
+            List<ManagedFile> result = new List<ManagedFile>();
+
+            foreach (ManagedFile file in files) {
+                if (file.hasTags(tags)) result.Add(file);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Finds all files with selected tag
+        /// </summary>
+        /// <param name="tag">Tag</param>
+        /// <returns>List of files</returns>
+        public List<ManagedFile> getFilesWithTag(string tag) {
+            List<ManagedFile> result = new List<ManagedFile>();
+
+            foreach (ManagedFile file in files) {
+                if (file.hasTag(tag)) result.Add(file);
+            }
+
+            return result;
+        }
     }
 }

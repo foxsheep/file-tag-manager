@@ -144,16 +144,18 @@ namespace VideoTagManager.UI {
         //Scans folder and overwrites the existing data
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             //BROKEN fix it later
-            ImportFileForm form = new ImportFileForm();
-            form.ShowDialog();
+            throw new NotImplementedException("Not implemented yet");
 
-            string path = form.chosenPath;
-            try {
-                writer.writeAll(path);
-                Refresh();
-            } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
-            }
+            //ImportFileForm form = new ImportFileForm();
+            //form.ShowDialog();
+
+            //string path = form.chosenPath;
+            //try {
+            //    writer.writeAll(path);
+            //    Refresh();
+            //} catch (Exception ex) {
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private void btnNext_Click(object sender, EventArgs e) {
@@ -184,6 +186,28 @@ namespace VideoTagManager.UI {
                 writer.exportDataFile(browser.SelectedPath);
                 MessageBox.Show("Data exported successefully");
             }
+        }
+
+        private void startSearchToolStripMenuItem_Click(object sender, EventArgs e) {
+            //Start search form
+            try {
+                SearchForm newSearch = new SearchForm(this.searcher);
+                if (newSearch.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                    filesToShow = newSearch.searchResult;
+                    currentIndex = 0;
+                    showFilesOnScreen();
+                }
+            } catch (ArgumentException ex) {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void saveChangesToolStripMenuItem_Click(object sender, EventArgs e) {
+            writer.writeFileList(searcher.allFiles());
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
+            MessageBox.Show("Coded by Gonçalo João Correia\n\nGoncaloJoaoCorreia@gmail.com\nhttps://github.com/GoncaloJoaoCorreia", "About");
         }
 
     }

@@ -76,6 +76,18 @@ namespace VideoTagManager.Model {
                 tags.Add(t);
         }
 
+        public bool hasTag(string tag) {
+            Tag t = new Tag(tag);
+            return tags.Contains(t);
+        }
+
+        public bool hasTags(string[] tags) {
+            foreach (string t in tags) {
+                if(!this.hasTag(t)) return false;
+            }
+            return true;
+        }
+
         public void addAuthor(Author a) {
             authors.Add(a);
         }
