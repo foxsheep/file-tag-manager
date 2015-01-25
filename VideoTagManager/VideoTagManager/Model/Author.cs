@@ -9,7 +9,7 @@ namespace VideoTagManager.Model {
     /// <summary>
     /// Class that models a file's author
     /// </summary>
-    class Author {
+    public class Author {
 
         public string name { get; set; }
         public string comment { get; set; }

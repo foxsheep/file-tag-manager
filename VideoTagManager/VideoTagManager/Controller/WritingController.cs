@@ -7,7 +7,7 @@ using VideoTagManager.FileIO;
 using VideoTagManager.Model;
 
 namespace VideoTagManager.Controller {
-    class WritingController {
+    public class WritingController {
 
         private List<ManagedFile> filesToWrite;
         private DataWriter writer;
@@ -29,6 +29,21 @@ namespace VideoTagManager.Controller {
             }
             writer.writeFiles(filesToWrite);
             filesToWrite.Clear();
+        }
+        
+        /// <summary>
+        /// Save files to XML. Overwrites existing data.
+        /// </summary>
+        /// <param name="list">Files to save</param>
+        public void writeFileList(List<ManagedFile> list) {
+            writer.writeFiles(list);
+        }
+
+        /// <summary>
+        /// Deletes everything stored by the app. Oh noes!
+        /// </summary>
+        public void deleteEverything() {
+            writer.deleteEverything();
         }
     }
 }

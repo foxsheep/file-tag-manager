@@ -7,7 +7,7 @@ using VideoTagManager.FileIO;
 using VideoTagManager.Model;
 
 namespace VideoTagManager.Controller {
-    class ReadingController {
+    public class ReadingController {
 
         private DataParser parser;
 

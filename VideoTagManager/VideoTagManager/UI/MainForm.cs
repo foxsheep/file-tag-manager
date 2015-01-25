@@ -54,11 +54,7 @@ namespace VideoTagManager.UI {
             }
         }
 
-        /// <summary>
-        /// Creates a panel with the file thumbnail and it's title below
-        /// </summary>
-        /// <param name="managedFile">The file</param>
-        /// <returns>A panel</returns>
+        //Creates a panel with the file thumbnail and it's title below. The tag references the file's path.
         private Control createFilePanel(ManagedFile managedFile) {
             TableLayoutPanel filePan = new TableLayoutPanel();
             filePan.ColumnCount = 1;
@@ -67,15 +63,17 @@ namespace VideoTagManager.UI {
             filePan.RowStyles.Add(new RowStyle(SizeType.Percent, 40F)); //Title row
             filePan.Dock = DockStyle.Fill;
 
-            //Thumbnail panel : TODO
+            //File thumbnail
             PictureBox p = new PictureBox();
             p.BackColor = Control.DefaultBackColor;
             p.Dock = DockStyle.Fill;
             p.SizeMode = PictureBoxSizeMode.Zoom;
             ShellFile shellFile = ShellFile.FromFilePath(managedFile.path);
             Bitmap shellThumb = shellFile.Thumbnail.ExtraLargeBitmap;
+            shellThumb.Tag = managedFile.path; 
             shellThumb.MakeTransparent(Color.Black);
             p.Image = shellThumb;
+            p.Tag = managedFile.path;
             filePan.Controls.Add(p);
 
             //Title of file
@@ -83,8 +81,70 @@ namespace VideoTagManager.UI {
             titleLbl.Text = managedFile.name;
             titleLbl.Anchor = AnchorStyles.None;
             filePan.Controls.Add(titleLbl);
+            titleLbl.Tag = managedFile.path;
+
+            filePan.Tag = managedFile.path;
+
+            //Create and attach click event handler
+            EventHandler clickHandler = new EventHandler(filePanel_Click);
+            filePan.Click += clickHandler;
+            titleLbl.Click += clickHandler;
+            p.Click += clickHandler;
 
             return filePan;
+        }
+
+        private void filePanel_Click(object sender, EventArgs e) {
+            //Handles clicking on a file
+            MouseEventArgs me = (MouseEventArgs) e;
+            Control file = (Control) sender;
+            //If cast was successeful
+            if (file != null && me != null) {
+                //File path is stored in Tag
+                string controlTag = (string) file.Tag;
+                if (me.Button == MouseButtons.Right) {
+                    //TODO: Right click shows file config dialog
+                    FileConfigForm configForm = new FileConfigForm(writer, searcher.getFileByPath(controlTag), searcher);
+                    configForm.Show();
+                } else if (me.Button == MouseButtons.Left) {
+                    //Left click opens the file
+                    System.Diagnostics.Process.Start(controlTag);
+                }
+            }
+        }
+
+        //On closing, ask the user if he wants to save changes
+        protected override void OnFormClosing(FormClosingEventArgs e) {
+            base.OnFormClosing(e);
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            // Confirm user wants to close
+            switch (MessageBox.Show(this, "Save changes?", "Closing", MessageBoxButtons.YesNo)) {
+                case DialogResult.Yes:
+                    writer.writeFileList(searcher.allFiles());
+                    break;
+                default:
+                    break;
+            }       
+        }
+
+        //Delete XML and clear file panel
+        private void deleteStoredDataToolStripMenuItem_Click(object sender, EventArgs e) {
+            writer.deleteEverything();
+            tableLayoutPanel1.Controls.Clear();
+        }
+
+        //Scans folder and overwrites the existing data
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
+            ImportFileForm form = new ImportFileForm();
+            form.ShowDialog();
+
+            string path = form.chosenPath;
+            try {
+                writer.writeAll(path);
+                Refresh();
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
 
     }

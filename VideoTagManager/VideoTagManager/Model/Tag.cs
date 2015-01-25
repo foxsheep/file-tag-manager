@@ -9,7 +9,7 @@ namespace VideoTagManager.Model {
     /// <summary>
     /// Class that models a Tag used to classify a managed file
     /// </summary>
-    class Tag {
+    public class Tag {
 
         public string tag { get; set; }
         public string description { get; set; }
@@ -22,6 +22,11 @@ namespace VideoTagManager.Model {
         public Tag(string tag) {
             this.tag = tag;
             this.description = "";
+        }
+
+        public Tag(Tag other) {
+            this.tag = other.tag;
+            this.description = other.description;
         }
 
         public Tag(string tag, string description) {
@@ -38,6 +43,15 @@ namespace VideoTagManager.Model {
             Tag objAsTag = obj as Tag;
             if (objAsTag == null) return false;
             else return (this.tag == objAsTag.tag);
+        }
+
+        public override int GetHashCode() {
+            char[] tag = this.tag.ToCharArray();
+            int hash = 0;
+            for (int i = 0; i < tag.Count(); i++) {
+                hash += (int) Char.GetNumericValue(tag[i]);
+            }
+            return hash;
         }
     }
 }

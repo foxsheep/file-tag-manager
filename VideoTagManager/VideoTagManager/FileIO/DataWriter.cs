@@ -92,14 +92,31 @@ namespace VideoTagManager.FileIO {
 
         /// <summary>
         /// Checks if the data file exists. If not, creates a new file with an empty node.
+        /// If it does, delete it and overwrite with new file.
         /// </summary>
         private static void checkFileExistence() {
-            if (!DataParser.dataFileExists()) {
-                XmlWriter writer = XmlWriter.Create(Values.DATA_FILE_PATH);
-                writer.WriteStartDocument();
-                writer.WriteStartElement("files");
-                writer.WriteEndDocument();
-                writer.Close();
+            deleteFile();
+
+            XmlWriter writer = XmlWriter.Create(Values.DATA_FILE_PATH);
+            writer.WriteStartDocument();
+            writer.WriteStartElement("files");
+            writer.WriteEndDocument();
+            writer.Close();
+        }
+
+        /// <summary>
+        /// Duh.
+        /// </summary>
+        public void deleteEverything() {
+            deleteFile();
+        }
+
+        /// <summary>
+        /// If file exists, delete it.
+        /// </summary>
+        private static void deleteFile() {
+            if (DataParser.dataFileExists()) {
+                File.Delete(Values.DATA_FILE_PATH);
             }
         }
     }

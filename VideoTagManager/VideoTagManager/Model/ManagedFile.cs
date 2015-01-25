@@ -10,7 +10,7 @@ namespace VideoTagManager.Model {
     /// <summary>
     /// Class that models a file to be managed by the program
     /// </summary>
-    class ManagedFile {
+    public class ManagedFile {
         private const int MAX_RATING = 5;
         private const int MIN_RATING = 0;
 
@@ -74,12 +74,22 @@ namespace VideoTagManager.Model {
         }
 
         public void addTag(Tag t) {
-            tags.Add(t);
+            if(!tags.Contains(t))
+                tags.Add(t);
         }
 
         public void addAuthor(Author a) {
             authors.Add(a);
         }
 
+
+        public void removeTag(string tag) {
+            foreach (Tag t in tags) {
+                if (t.tag == tag) {
+                    tags.Remove(t);
+                    break;
+                }
+            }
+        }
     }
 }

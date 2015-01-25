@@ -32,7 +32,6 @@ namespace VideoTagManager {
                 }
                 
             }
-            //Application.Run(new Form1());
         }
 
         static void init() {
