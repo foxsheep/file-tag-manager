@@ -22,6 +22,7 @@ namespace VideoTagManager.UI {
 
         private List<ManagedFile> filesToShow;
         private int currentIndex;
+        private int filesOnScreen;
 
         private const int MAX_FILES_ON_SCREEN = 14;
 
@@ -34,13 +35,18 @@ namespace VideoTagManager.UI {
             //Empty list
             filesToShow = new List<ManagedFile>();
             currentIndex = 0;
+            filesOnScreen = 0;
         }
 
         private void viewAllFilesToolStripMenuItem_Click(object sender, EventArgs e) {
             filesToShow = searcher.allFiles();
+            showFilesOnScreen();
+        }
+
+        private void showFilesOnScreen() {
             currentIndex = 0;
             tableLayoutPanel1.Controls.Clear(); //Clear the files currently on screen
-            int filesOnScreen = 0;
+            filesOnScreen = 0;
             while (filesOnScreen < MAX_FILES_ON_SCREEN && currentIndex < filesToShow.Count()) {
                 tableLayoutPanel1.Controls.Add(createFilePanel(filesToShow[currentIndex]));
                 filesOnScreen++;
@@ -62,10 +68,14 @@ namespace VideoTagManager.UI {
             filePan.Dock = DockStyle.Fill;
 
             //Thumbnail panel : TODO
-            Panel p = new Panel();
+            PictureBox p = new PictureBox();
+            p.BackColor = Control.DefaultBackColor;
+            p.Dock = DockStyle.Fill;
+            p.SizeMode = PictureBoxSizeMode.Zoom;
             ShellFile shellFile = ShellFile.FromFilePath(managedFile.path);
             Bitmap shellThumb = shellFile.Thumbnail.ExtraLargeBitmap;
-            //p.BackgroundImage = shellThumb;
+            shellThumb.MakeTransparent(Color.Black);
+            p.Image = shellThumb;
             filePan.Controls.Add(p);
 
             //Title of file
