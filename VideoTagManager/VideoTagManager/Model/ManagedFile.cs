@@ -26,7 +26,7 @@ namespace VideoTagManager.Model {
             }
             set {
                 if (value < MIN_RATING || value > MAX_RATING) {
-                    
+
                     throw new ArgumentException(String.Format("Rating must be a value between %d and %d", MIN_RATING, MAX_RATING));
                 } else {
                     this.mRating = value;
@@ -36,7 +36,6 @@ namespace VideoTagManager.Model {
         public string comment { get; set; }
 
         public ManagedFile() {
-            //TODO:INITIALIZE TAGS <undefined>
             this.name = "";
             this.path = "";
             this.tags = new List<Tag>();
@@ -55,7 +54,6 @@ namespace VideoTagManager.Model {
         }
 
         public ManagedFile(string name, string path) {
-            //TODO:INITIALIZE TAGS <undefined>
             this.name = name;
             this.path = path;
             this.tags = new List<Tag>();
@@ -74,7 +72,7 @@ namespace VideoTagManager.Model {
         }
 
         public void addTag(Tag t) {
-            if(!tags.Contains(t))
+            if (!tags.Contains(t))
                 tags.Add(t);
         }
 
@@ -90,6 +88,10 @@ namespace VideoTagManager.Model {
                     break;
                 }
             }
+        }
+
+        public bool isUntagged() {
+            return (tags.Count == 0);
         }
     }
 }

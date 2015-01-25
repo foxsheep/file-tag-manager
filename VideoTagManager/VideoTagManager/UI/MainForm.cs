@@ -143,6 +143,7 @@ namespace VideoTagManager.UI {
 
         //Scans folder and overwrites the existing data
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
+            //BROKEN fix it later
             ImportFileForm form = new ImportFileForm();
             form.ShowDialog();
 
@@ -166,6 +167,22 @@ namespace VideoTagManager.UI {
             if (currentIndex > MAX_FILES_ON_SCREEN) {
                 currentIndex -= (MAX_FILES_ON_SCREEN + filesOnScreen);
                 showFilesOnScreen();
+            }
+        }
+
+        //Show all untagged files
+        private void viewUndefinedFilesToolStripMenuItem_Click(object sender, EventArgs e) {
+            filesToShow = searcher.getUntaggedFiles();
+            currentIndex = 0;
+            showFilesOnScreen();
+        }
+
+        private void exportStoredDataToolStripMenuItem_Click(object sender, EventArgs e) {
+            FolderBrowserDialog browser = new FolderBrowserDialog();
+            browser.Description = "Please select destination folder";
+            if (browser.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                writer.exportDataFile(browser.SelectedPath);
+                MessageBox.Show("Data exported successefully");
             }
         }
 

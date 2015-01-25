@@ -49,5 +49,9 @@ namespace VideoTagManager.Controller {
             Tag toAdd = new Tag(tagName, tagDescription);
             files.addTagToFile(toAdd, filePath);
         }
+
+        public List<ManagedFile> getUntaggedFiles() {
+            return files.getAllUntaggedFiles();
+        }
     }
 }

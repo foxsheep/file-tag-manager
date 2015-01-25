@@ -45,5 +45,13 @@ namespace VideoTagManager.Controller {
         public void deleteEverything() {
             writer.deleteEverything();
         }
+
+        /// <summary>
+        /// Copies the data file to the specified folder
+        /// </summary>
+        /// <param name="destinationDir">Path to folder</param>
+        public void exportDataFile(string destinationDir) {
+            writer.copyTo(destinationDir);
+        }
     }
 }

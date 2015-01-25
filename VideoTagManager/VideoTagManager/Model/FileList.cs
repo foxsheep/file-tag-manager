@@ -81,5 +81,15 @@ namespace VideoTagManager.Model {
                 }
             }
         }
+
+        public List<ManagedFile> getAllUntaggedFiles() {
+            List<ManagedFile> untagged = new List<ManagedFile>();
+            foreach (ManagedFile f in files) {
+                if (f.isUntagged()) {
+                    untagged.Add(f);
+                }
+            }
+            return untagged;
+        }
     }
 }

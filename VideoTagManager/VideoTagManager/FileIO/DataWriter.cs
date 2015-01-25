@@ -119,5 +119,14 @@ namespace VideoTagManager.FileIO {
                 File.Delete(Values.DATA_FILE_PATH);
             }
         }
+
+        public void copyTo(string destinationDir) {
+            StringBuilder s = new StringBuilder();
+            s.Append(destinationDir);
+            s.Append(Path.DirectorySeparatorChar);
+            s.Append(Values.DATA_FILE_NAME);
+
+            File.Copy(Values.DATA_FILE_PATH, s.ToString());
+        }
     }
 }
