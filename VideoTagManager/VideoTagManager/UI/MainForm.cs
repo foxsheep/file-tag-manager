@@ -28,6 +28,7 @@ namespace VideoTagManager.UI {
 
         public MainForm() {
             InitializeComponent();
+            CenterToScreen();
             reader = new ReadingController();
             writer = new WritingController();
             //Read XML and initialize search engine
@@ -83,6 +84,8 @@ namespace VideoTagManager.UI {
             p.Image = shellThumb;
             p.Tag = managedFile.path;
             filePan.Controls.Add(p);
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(p, makeTooltip(managedFile));
 
             //Title of file
             Label titleLbl = new Label();
@@ -100,6 +103,20 @@ namespace VideoTagManager.UI {
             p.Click += clickHandler;
 
             return filePan;
+        }
+
+        private string makeTooltip(ManagedFile file) {
+            StringBuilder tt = new StringBuilder();
+            if (file.tags.Count() > 0) {
+                tt.Append("Tagged as:");
+                foreach (Tag t in file.tags) {
+                    tt.Append("\n\t");
+                    tt.Append(t.tag);
+                }
+            } else {
+                tt.Append("Untagged file");
+            }
+            return tt.ToString();
         }
 
         private void filePanel_Click(object sender, EventArgs e) {

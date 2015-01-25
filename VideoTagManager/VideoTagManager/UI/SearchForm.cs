@@ -21,6 +21,7 @@ namespace VideoTagManager.UI {
 
         public SearchForm(SearchController searcher) {
             InitializeComponent();
+            CenterToScreen();
             this.searcher = searcher;
             searchResult = new List<ManagedFile>();
         }

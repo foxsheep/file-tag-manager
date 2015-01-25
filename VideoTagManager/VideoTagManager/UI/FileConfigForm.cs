@@ -18,6 +18,7 @@ namespace VideoTagManager.UI {
         SearchController searcher;
         public FileConfigForm(WritingController writer, ManagedFile file, SearchController searcher) {
             InitializeComponent();
+            CenterToScreen();
             this.writer = writer;
             this.file = file;
             this.searcher = searcher;
