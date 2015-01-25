@@ -40,11 +40,11 @@ namespace VideoTagManager.UI {
 
         private void viewAllFilesToolStripMenuItem_Click(object sender, EventArgs e) {
             filesToShow = searcher.allFiles();
+            currentIndex = 0;
             showFilesOnScreen();
         }
 
         private void showFilesOnScreen() {
-            currentIndex = 0;
             tableLayoutPanel1.Controls.Clear(); //Clear the files currently on screen
             filesOnScreen = 0;
             while (filesOnScreen < MAX_FILES_ON_SCREEN && currentIndex < filesToShow.Count()) {
@@ -52,6 +52,14 @@ namespace VideoTagManager.UI {
                 filesOnScreen++;
                 currentIndex++;
             }
+
+            //Make navigation buttons appear on the lower right corner
+            if (filesOnScreen < MAX_FILES_ON_SCREEN) {
+                for (int i = filesOnScreen; i < MAX_FILES_ON_SCREEN; i++) {
+                    tableLayoutPanel1.Controls.Add(new Panel());
+                }
+            }
+            tableLayoutPanel1.Controls.Add(navigationPanel);
         }
 
         //Creates a panel with the file thumbnail and it's title below. The tag references the file's path.
@@ -144,6 +152,20 @@ namespace VideoTagManager.UI {
                 Refresh();
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e) {
+            //If there's anything more to show
+            if (currentIndex < filesToShow.Count()) {
+                showFilesOnScreen();
+            }
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e) {
+            if (currentIndex > MAX_FILES_ON_SCREEN) {
+                currentIndex -= (MAX_FILES_ON_SCREEN + filesOnScreen);
+                showFilesOnScreen();
             }
         }
 
