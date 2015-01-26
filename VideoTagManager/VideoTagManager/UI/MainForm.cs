@@ -87,6 +87,7 @@ namespace VideoTagManager.UI {
             ToolTip tt = new ToolTip();
             tt.SetToolTip(p, makeTooltip(managedFile));
 
+
             //Title of file
             Label titleLbl = new Label();
             titleLbl.Text = managedFile.name;
