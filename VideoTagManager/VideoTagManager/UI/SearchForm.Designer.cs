@@ -87,6 +87,7 @@
             this.txtAuthors.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtAuthors.Location = new System.Drawing.Point(188, 54);
             this.txtAuthors.Name = "txtAuthors";
+            this.txtAuthors.ReadOnly = true;
             this.txtAuthors.Size = new System.Drawing.Size(288, 20);
             this.txtAuthors.TabIndex = 1;
             this.txtAuthors.Text = "Not implemented yet";

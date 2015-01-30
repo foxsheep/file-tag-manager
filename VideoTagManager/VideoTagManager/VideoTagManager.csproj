@@ -78,6 +78,12 @@
     <Compile Include="UI\FileConfigForm.Designer.cs">
       <DependentUpon>FileConfigForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\HowToForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\HowToForm.Designer.cs">
+      <DependentUpon>HowToForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ImportFileForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,9 +116,13 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="UI\FileConfigForm.resx">
       <DependentUpon>FileConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\HowToForm.resx">
+      <DependentUpon>HowToForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ImportFileForm.resx">
       <DependentUpon>ImportFileForm.cs</DependentUpon>
@@ -139,6 +149,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG_HowToUse.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

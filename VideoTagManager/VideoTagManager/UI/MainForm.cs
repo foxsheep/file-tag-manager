@@ -230,5 +230,10 @@ namespace VideoTagManager.UI {
             MessageBox.Show("Coded by Gonçalo João Correia\n\nGoncaloJoaoCorreia@gmail.com\nhttps://github.com/GoncaloJoaoCorreia", "About");
         }
 
+        private void howToUseToolStripMenuItem_Click(object sender, EventArgs e) {
+            HowToForm howto = new HowToForm();
+            howto.Show();
+        }
+
     }
 }
