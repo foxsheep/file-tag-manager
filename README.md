@@ -20,6 +20,6 @@ WindowsAPICodePack is needed for some of the program's functionalities, most not
 
 ## License
 
-This software is licensed under the [GNU GENERAL PUBLIC LICENSE](LICENCE).
 TL,DR: 
+
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
