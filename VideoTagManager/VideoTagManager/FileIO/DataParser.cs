@@ -25,22 +25,27 @@ namespace VideoTagManager.FileIO {
             }
             XElement root = XElement.Load(Values.DATA_FILE_PATH);
             IEnumerable<XElement> files = root.Elements();
+
+            List<XElement> toRemove = new List<XElement>();
             foreach (XElement file in files) {
                 string path = file.Element("path").Value;
 
                 //If the file doesnt exist in the system, delete it
                 if (!File.Exists(path)) {
-                    file.Remove();
-                    continue;
+                    toRemove.Add(file);
+                } else {
+
+                    string name = file.Element("name").Value;
+                    int rating = int.Parse(file.Element("rating").Value);
+                    string comment = file.Element("comment").Value;
+                    List<Tag> tags = readTags(file);
+                    List<Author> authors = readAuthors(file);
+
+                    list.Add(new ManagedFile(name, path, tags, authors, rating, comment));
                 }
-
-                string name = file.Element("name").Value;
-                int rating = int.Parse(file.Element("rating").Value);
-                string comment = file.Element("comment").Value;
-                List<Tag> tags = readTags(file);
-                List<Author> authors = readAuthors(file);
-
-                list.Add(new ManagedFile(name, path, tags, authors, rating, comment));
+            }
+            foreach (XElement file in toRemove) {
+                file.Remove();
             }
 
             root.Save(Values.DATA_FILE_PATH);

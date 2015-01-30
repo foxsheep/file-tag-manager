@@ -139,5 +139,26 @@ namespace VideoTagManager.Model {
 
             return result;
         }
+
+        public void removeAuthorFromFile(string author, string filePath) {
+            foreach (ManagedFile file in files) {
+                if (file.path == filePath) {
+                    file.removeAuthor(author);
+                    break;
+                }
+            }
+        }
+
+        public void addAuthorToFile(Author toAdd, string filePath) {
+            foreach (ManagedFile file in files) {
+                if (file.path == filePath) {
+                    file.addAuthor(toAdd);
+                    if (!allAuthors.Contains(toAdd)) {
+                        allAuthors.Add(toAdd);
+                    }
+                    break;
+                }
+            }
+        }
     }
 }

@@ -30,6 +30,14 @@ namespace VideoTagManager.Controller {
             return files.allTags;
         }
 
+        /// <summary>
+        /// Gets all authors stored in all files.
+        /// </summary>
+        /// <returns>Author list</returns>
+        public List<Author> getAllAuthors() {
+            return files.allAuthors;
+        }
+
         public void removeTagFromFile(string tag, string filePath) {
             files.removeTagFromFile(tag, filePath);
         }
@@ -64,6 +72,26 @@ namespace VideoTagManager.Controller {
 
         public List<ManagedFile> getFilesWithTags(string tagSearch) {
             return files.getFilesWithTag(tagSearch);
+        }
+
+        public void removeAuthorFromFile(string author, string filePath) {
+            files.removeAuthorFromFile(author, filePath);
+        }
+
+        public void addExistingAuthorToFile(string author, string filePath) {
+            Author toAdd = new Author();
+            foreach (Author a in files.allAuthors) {
+                if (a.name == author) {
+                    toAdd = new Author(a);
+                    break;
+                }
+            }
+            files.addAuthorToFile(toAdd, filePath);
+        }
+
+        public void addNewAuthorToFile(string authorName, string comment, string filePath) {
+            Author toAdd = new Author(authorName, comment);
+            files.addAuthorToFile(toAdd, filePath);
         }
     }
 }

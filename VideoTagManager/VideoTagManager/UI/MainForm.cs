@@ -79,7 +79,7 @@ namespace VideoTagManager.UI {
             p.SizeMode = PictureBoxSizeMode.Zoom;
             ShellFile shellFile = ShellFile.FromFilePath(managedFile.path);
             Bitmap shellThumb = shellFile.Thumbnail.ExtraLargeBitmap;
-            shellThumb.Tag = managedFile.path; 
+            shellThumb.Tag = managedFile.path;
             shellThumb.MakeTransparent(Color.Black);
             p.Image = shellThumb;
             p.Tag = managedFile.path;
@@ -150,7 +150,7 @@ namespace VideoTagManager.UI {
                     break;
                 default:
                     break;
-            }       
+            }
         }
 
         //Delete XML and clear file panel
@@ -161,19 +161,21 @@ namespace VideoTagManager.UI {
 
         //Scans folder and overwrites the existing data
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
-            //BROKEN fix it later
-            throw new NotImplementedException("Not implemented yet");
+            DialogResult dialogResult = MessageBox.Show("Warning: this will overwrite all currently stored data.\nProceed?", "Scan folder", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes) {
+                ImportFileForm form = new ImportFileForm();
+                form.ShowDialog();
+                string path = form.chosenPath;
+                if (!String.IsNullOrEmpty(path)) {
+                    try {
+                        writer.writeAll(path);
+                        searcher = new SearchController(reader.readAllFiles());
 
-            //ImportFileForm form = new ImportFileForm();
-            //form.ShowDialog();
-
-            //string path = form.chosenPath;
-            //try {
-            //    writer.writeAll(path);
-            //    Refresh();
-            //} catch (Exception ex) {
-            //    MessageBox.Show(ex.Message);
-            //}
+                    } catch (Exception ex) {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
         }
 
         private void btnNext_Click(object sender, EventArgs e) {

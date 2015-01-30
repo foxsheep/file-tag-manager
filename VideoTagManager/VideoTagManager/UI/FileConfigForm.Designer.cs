@@ -37,11 +37,20 @@
             this.allTagsPanel = new System.Windows.Forms.TableLayoutPanel();
             this.allTagsList = new System.Windows.Forms.ListBox();
             this.btnAddtag = new System.Windows.Forms.Button();
+            this.authorManagementPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.fileAuthorsList = new System.Windows.Forms.ListBox();
+            this.btnRemoveAuthor = new System.Windows.Forms.Button();
+            this.btnCreateAuthor = new System.Windows.Forms.Button();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.allAuthorsList = new System.Windows.Forms.ListBox();
+            this.btnAddAuthor = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.fileInfoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileThumb)).BeginInit();
             this.tagManagementPanel.SuspendLayout();
             this.allTagsPanel.SuspendLayout();
+            this.authorManagementPanel.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -49,6 +58,7 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.authorManagementPanel, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.fileInfoPanel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.fileThumb, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tagManagementPanel, 0, 1);
@@ -219,6 +229,92 @@
             this.btnAddtag.UseVisualStyleBackColor = true;
             this.btnAddtag.Click += new System.EventHandler(this.btnAddtag_Click);
             // 
+            // authorManagementPanel
+            // 
+            this.authorManagementPanel.ColumnCount = 2;
+            this.authorManagementPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.authorManagementPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.authorManagementPanel.Controls.Add(this.fileAuthorsList, 0, 0);
+            this.authorManagementPanel.Controls.Add(this.btnRemoveAuthor, 0, 1);
+            this.authorManagementPanel.Controls.Add(this.btnCreateAuthor, 1, 1);
+            this.authorManagementPanel.Controls.Add(this.tableLayoutPanel3, 1, 0);
+            this.authorManagementPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.authorManagementPanel.Location = new System.Drawing.Point(369, 259);
+            this.authorManagementPanel.Name = "authorManagementPanel";
+            this.authorManagementPanel.RowCount = 2;
+            this.authorManagementPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 77.17718F));
+            this.authorManagementPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.82282F));
+            this.authorManagementPanel.Size = new System.Drawing.Size(361, 333);
+            this.authorManagementPanel.TabIndex = 3;
+            // 
+            // fileAuthorsList
+            // 
+            this.fileAuthorsList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileAuthorsList.FormattingEnabled = true;
+            this.fileAuthorsList.HorizontalScrollbar = true;
+            this.fileAuthorsList.Location = new System.Drawing.Point(3, 3);
+            this.fileAuthorsList.Name = "fileAuthorsList";
+            this.fileAuthorsList.Size = new System.Drawing.Size(174, 251);
+            this.fileAuthorsList.TabIndex = 2;
+            // 
+            // btnRemoveAuthor
+            // 
+            this.btnRemoveAuthor.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnRemoveAuthor.Location = new System.Drawing.Point(52, 283);
+            this.btnRemoveAuthor.Name = "btnRemoveAuthor";
+            this.btnRemoveAuthor.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveAuthor.TabIndex = 0;
+            this.btnRemoveAuthor.Text = "Remove";
+            this.btnRemoveAuthor.UseVisualStyleBackColor = true;
+            this.btnRemoveAuthor.Click += new System.EventHandler(this.btnRemoveAuthor_Click);
+            // 
+            // btnCreateAuthor
+            // 
+            this.btnCreateAuthor.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCreateAuthor.Location = new System.Drawing.Point(233, 283);
+            this.btnCreateAuthor.Name = "btnCreateAuthor";
+            this.btnCreateAuthor.Size = new System.Drawing.Size(75, 23);
+            this.btnCreateAuthor.TabIndex = 0;
+            this.btnCreateAuthor.Text = "Create";
+            this.btnCreateAuthor.UseVisualStyleBackColor = true;
+            this.btnCreateAuthor.Click += new System.EventHandler(this.btnCreateAuthor_Click);
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.allAuthorsList, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnAddAuthor, 0, 1);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(183, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(175, 251);
+            this.tableLayoutPanel3.TabIndex = 1;
+            // 
+            // allAuthorsList
+            // 
+            this.allAuthorsList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.allAuthorsList.FormattingEnabled = true;
+            this.allAuthorsList.HorizontalScrollbar = true;
+            this.allAuthorsList.Location = new System.Drawing.Point(3, 3);
+            this.allAuthorsList.Name = "allAuthorsList";
+            this.allAuthorsList.Size = new System.Drawing.Size(169, 194);
+            this.allAuthorsList.TabIndex = 0;
+            // 
+            // btnAddAuthor
+            // 
+            this.btnAddAuthor.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAddAuthor.Location = new System.Drawing.Point(50, 214);
+            this.btnAddAuthor.Name = "btnAddAuthor";
+            this.btnAddAuthor.Size = new System.Drawing.Size(75, 23);
+            this.btnAddAuthor.TabIndex = 1;
+            this.btnAddAuthor.Text = "<< Add";
+            this.btnAddAuthor.UseVisualStyleBackColor = true;
+            this.btnAddAuthor.Click += new System.EventHandler(this.btnAddAuthor_Click);
+            // 
             // FileConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -233,6 +329,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.fileThumb)).EndInit();
             this.tagManagementPanel.ResumeLayout(false);
             this.allTagsPanel.ResumeLayout(false);
+            this.authorManagementPanel.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -253,5 +351,12 @@
         private System.Windows.Forms.TableLayoutPanel allTagsPanel;
         private System.Windows.Forms.ListBox allTagsList;
         private System.Windows.Forms.Button btnAddtag;
+        private System.Windows.Forms.TableLayoutPanel authorManagementPanel;
+        private System.Windows.Forms.ListBox fileAuthorsList;
+        private System.Windows.Forms.Button btnRemoveAuthor;
+        private System.Windows.Forms.Button btnCreateAuthor;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.ListBox allAuthorsList;
+        private System.Windows.Forms.Button btnAddAuthor;
     }
 }

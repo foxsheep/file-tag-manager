@@ -26,8 +26,6 @@ namespace VideoTagManager.FileIO {
         public void writeFiles(List<ManagedFile> files) {
             checkFileExistence();
             root = XElement.Load(Values.DATA_FILE_PATH);
-            //xelement.Add(new XElement("file", "hello"));
-            //xelement.Add(new XElement("file", "yolo"));
 
             foreach (ManagedFile file in files) {
                 writeFile(file);

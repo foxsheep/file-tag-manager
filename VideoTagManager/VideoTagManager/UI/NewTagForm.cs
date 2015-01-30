@@ -11,20 +11,30 @@ using System.Windows.Forms;
 namespace VideoTagManager.UI {
     public partial class NewTagForm : Form {
 
-        public string tagName { get; set; }
-        public string tagDesc { get; set; }
+        public string name { get; set; }
+        public string desc { get; set; }
 
         public NewTagForm() {
             InitializeComponent();
             CenterToScreen();
-            tagName = "";
-            tagDesc = "";
+            name = "";
+            desc = "";
+        }
+
+        public NewTagForm(string nameLblTxt, string descLblTxt, string windowTitle) {
+            InitializeComponent();
+            CenterToScreen();
+            name = "";
+            desc = "";
+            tagDescriptionLbl.Text = descLblTxt;
+            tagNameLbl.Text = nameLblTxt;
+            this.Text = windowTitle;
         }
 
         private void btnConfirm_Click(object sender, EventArgs e) {
-            tagName = tagNameTxt.Text;
-            tagDesc = tagDescriptionTxt.Text;
-            if (String.IsNullOrEmpty(tagName)) {
+            name = tagNameTxt.Text;
+            desc = tagDescriptionTxt.Text;
+            if (String.IsNullOrEmpty(name)) {
                 DialogResult = System.Windows.Forms.DialogResult.Cancel;
             } else {
                 DialogResult = System.Windows.Forms.DialogResult.OK;

@@ -92,10 +92,9 @@ namespace VideoTagManager.Model {
             authors.Add(a);
         }
 
-
         public void removeTag(string tag) {
             foreach (Tag t in tags) {
-                if (t.tag == tag) {
+                if (t.Equals(tag)) {
                     tags.Remove(t);
                     break;
                 }
@@ -105,5 +104,15 @@ namespace VideoTagManager.Model {
         public bool isUntagged() {
             return (tags.Count == 0);
         }
+
+        public void removeAuthor(string author) {
+            foreach (Author a in authors) {
+                if (a.Equals(a)) {
+                    authors.Remove(a);
+                    break;
+                }
+            }
+        }
+
     }
 }
